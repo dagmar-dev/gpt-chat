@@ -16,14 +16,25 @@ app.use(
         origin: 'http://localhost:5173',
     })
 )
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.get('/', (req, res) => {
+    res.send('gpt server')
+})
 
 app.post('/', async (req, res) => {
+    const userMessage = req.body.message
+    console.log(req.body)
     const completion = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: 'Hello world' }],
+        messages: [
+            { role: 'user', content: `${userMessage}` },
+            { role: 'system', content: 'i am a bartender that sticks to the role of a bartender' },
+        ],
     })
     res.json(completion.data.choices[0].message)
-    console.log(completion.data.choices[0].message)
+    console.log(completion.data)
 })
 
 app.listen(port, () => {
