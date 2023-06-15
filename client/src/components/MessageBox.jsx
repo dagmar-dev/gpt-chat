@@ -1,6 +1,6 @@
 
 
-export default function MessageBox() {
+export default function MessageBox(props) {
   return (
       <div>
           <input
@@ -8,6 +8,7 @@ export default function MessageBox() {
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
           />
+          <button></button>
       </div>
   )
 }

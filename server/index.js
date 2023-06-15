@@ -34,7 +34,7 @@ app.post('/', async (req, res) => {
         ],
     })
     res.json(completion.data.choices[0].message)
-    console.log(completion.data)
+    console.log(completion.data.choices[0].message)
 })
 
 app.listen(port, () => {
