@@ -12,10 +12,32 @@ import { createSlice } from '@reduxjs/toolkit'
    usr:'client',
    message:'nothing'
  },
+ 
  {
    usr:'ai',
    message:'hbu'
- }
+ },
+ {
+   usr:'client',
+   message:'nothing'
+ },
+ {
+   usr:'client',
+   message:'nothing'
+ },
+ {
+   usr:'client',
+   message:'nothing'
+ },
+ {
+   usr:'client',
+   message:'nothing'
+ },
+ {
+   usr:'client',
+   message:'nothing'
+ },
+
 
 ]
 

@@ -8,8 +8,10 @@ import axios from 'axios'
 
 
 const submitMessage = () => {
-  const conversation = useSelector((state)=> state.conversation)
-  const message = conversation[conversation.length - 1].message
+  
+  // const conversation = useSelector((state)=> state.conversation)
+  // const message = conversation[conversation.length - 1].message
+  const message = ''
   console.log(message)
 axios
     .post('http://localhost:3000', {
@@ -24,15 +26,23 @@ axios
     })
 }
 
-
+const handleChange = (e) =>{ 
+  const newMessage = e.target.value
+  console.log(newMessage)
+}
+  const handleClick = () => {
+    submitMessage()
+    console.log('help')
+    
+  }
 
 export default function ChatArea() {
   const messages = useSelector((state)=> state.messages)
-submitMessage()
   return (
     
-    <section className="container">
+    <section className="container w-full h-full flex flex-col place-content-end  p-4 ">
       
+      <div className="messages-container">
       {messages.map((messages,index) => {
        
        if (messages.usr === 'client') {
@@ -45,10 +55,10 @@ submitMessage()
         message={messages.message}
         />}   
 })}
-        
-         <MessageBox
-        //  submit={submitMessage}
-         
+        </div>
+         <MessageBox 
+          handleClick={handleClick}
+          handleChange={handleChange}
          />
     </section>
   )

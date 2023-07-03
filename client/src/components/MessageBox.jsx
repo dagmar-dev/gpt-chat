@@ -2,13 +2,14 @@
 
 export default function MessageBox(props) {
   return (
-      <div>
-          <input
+      <div className="w-full flex justify-center items-center flex-row gap-2 " >
+          <input 
               type="text"
               placeholder="Type here"
-              className="input input-bordered w-full max-w-xs"
+              onChange={props.handleChange}
+              className="input input-bordered w-5/6 bg-neutral-focus"
           />
-          <button></button>
+          <button onClick={() => props.handleClick()}>send</button>
       </div>
   )
 }
