@@ -2,54 +2,51 @@ import Message from "./Message"
 import Response from "./Response"
 import MessageBox from "./MessageBox"
 import axios from 'axios'
-import { create } from 'zustand'
+import { useStore } from "../app/store"
+import { useState } from "react"
 
 
 
 
-const useStore = create((set) => ({
-  messages:[],
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
-}))
+export default function ChatArea(state) {
 
-const submitMessage = () => {
+  const [newMessage,setNewMessage] = useState('')
+
+  const messages = useStore(store=>store.messages)
+  const addMessage = useStore(store=>store.addMessage)
   
-  console.log()
+
+  
+  
+  const handleChange = (e) =>{ 
+    setNewMessage(e.target.value)
+    
+}
+
+  const handleClick = () => {
+    addMessage('client',newMessage,state)
+    submitMessage()
+  }
+
+  const submitMessage = () => {
+  // const message = messages[messages.length-1].message
+  const message = newMessage
+  
 axios
     .post('http://localhost:3000', {
-        message:'water'
+         message:message
     })
     
     .then(function (response) {
-        console.log(response)
+        addMessage('assistant',response.data.content,state)
+        console.log(messages)
     })
     .catch(function (error) {
         console.log(error)
     })
 }
 
-const handleChange = (e) =>{ 
-    const message = e.target.value
-    
-}
-  
 
-const handleClick = () => {
-  console.log()
-    submitMessage()
-  }
-
-export default function ChatArea() {
-
-
-  const messages = [
-    {
-      usr:'client',
-      message:'hi'
-
-    }
-  ]
   
   return (
     
@@ -58,7 +55,7 @@ export default function ChatArea() {
       <div className="messages-container px-2 h-full flex w-5/6 flex-col  place-content-end bg-neutral ">
       {messages.map((messages,index) => {
        
-       if (messages.usr === 'client') {
+       if (messages.role === 'client') {
         return <Message
         key={index}
         message={messages.message}
@@ -73,6 +70,8 @@ export default function ChatArea() {
           handleClick={handleClick}
           handleChange={handleChange}
          />
+
+         
     </section>
   )
 }
