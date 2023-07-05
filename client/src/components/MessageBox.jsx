@@ -1,15 +1,20 @@
 
 
+
+
+import { RxPaperPlane} from "react-icons/rx";
+
 export default function MessageBox(props) {
   return (
-      <div className="w-full flex justify-center items-center flex-row gap-2 " >
+      <div className="w-5/6 flex py-3 justify-center items-center flex-row gap-2 " >
           <input 
               type="text"
               placeholder="Type here"
               onChange={props.handleChange}
-              className="input input-bordered w-5/6 bg-neutral-focus"
+              className="input input-bordered w-full bg-neutral"
           />
-          <button onClick={() => props.handleClick()}>send</button>
+          
+          <RxPaperPlane className="text-primary  text-4xl cursor-pointe" onClick={() => props.handleClick()} />
       </div>
   )
 }
