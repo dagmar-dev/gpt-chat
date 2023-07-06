@@ -4,6 +4,7 @@ import MessageBox from "./MessageBox"
 import axios from 'axios'
 import { useStore } from "../app/store"
 import { useState } from "react"
+import {AnimatePresence} from "framer-motion"
 
 
 
@@ -11,6 +12,7 @@ import { useState } from "react"
 export default function ChatArea(state) {
 
   const [newMessage,setNewMessage] = useState('')
+  const [errorMsg,setErrotMsg] = useState("Type here")
 
   const messages = useStore(store=>store.messages)
   const addMessage = useStore(store=>store.addMessage)
@@ -24,8 +26,28 @@ export default function ChatArea(state) {
 }
 
   const handleClick = () => {
+    if (newMessage === ''){
+      setErrotMsg('Please Enter a Message')
+    }else{
     addMessage('client',newMessage,state)
     submitMessage()
+    setNewMessage('')
+    setErrotMsg('Type Here')
+    }
+    
+  }
+
+  const onKeyDown = (e) => {
+    if ((e).key === 'Enter'){
+    if (newMessage === ''){
+      setErrotMsg('Please Enter a Message')
+    }else{
+    addMessage('client',newMessage,state)
+    submitMessage()
+    setNewMessage('')
+    setErrotMsg('Type Here')
+    }
+    }
   }
 
   const submitMessage = () => {
@@ -50,9 +72,10 @@ axios
   
   return (
     
-    <section className="container h-full items-center  w-full h-full flex flex-col   p-4 ">
+    <section className="container m-h-screen items-center flex flex-col   p-4 ">
      
-      <div className="messages-container px-2 h-full flex w-5/6 flex-col  place-content-end bg-neutral ">
+      <div className="h-screen container overflow-scroll px-2 py-3 w-5/6 flex flex-col justify-end bg-neutral ">
+        <AnimatePresence initial={false} >
       {messages.map((messages,index) => {
        
        if (messages.role === 'client') {
@@ -65,10 +88,14 @@ axios
         message={messages.message}
         />}   
 })}
+</AnimatePresence>
         </div>
          <MessageBox 
           handleClick={handleClick}
           handleChange={handleChange}
+          handleKeyDown={onKeyDown}
+          errorPlaceholder={errorMsg}
+          newMessage={newMessage}
          />
 
          

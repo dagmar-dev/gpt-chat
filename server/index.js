@@ -30,7 +30,7 @@ app.post('/', async (req, res) => {
         model: 'gpt-3.5-turbo-0613',
         messages: [
             { role: 'user', content: `${userMessage}` },
-            { role: 'system', content: 'i am a bartender that sticks to the role of a bartender' },
+            { role: 'system', content: 'I am a tech support specialist and my job is to help anyone with any thechical problems no matter whats the issue' },
         ],
     })
     res.json(completion.data.choices[0].message)

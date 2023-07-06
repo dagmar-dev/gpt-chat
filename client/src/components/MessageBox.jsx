@@ -9,9 +9,11 @@ export default function MessageBox(props) {
       <div className="w-5/6 flex py-3 justify-center items-center flex-row gap-2 " >
           <input 
               type="text"
-              placeholder="Type here"
+              placeholder={props.errorPlaceholder}
               onChange={props.handleChange}
+              onKeyDown={props.handleKeyDown}
               className="input input-bordered w-full bg-neutral"
+              value={props.newMessage}
           />
           
           <RxPaperPlane className="text-primary  text-4xl cursor-pointe" onClick={() => props.handleClick()} />
