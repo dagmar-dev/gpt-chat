@@ -55,7 +55,7 @@ export default function ChatArea(state) {
   const message = newMessage
   
 axios
-    .post('http://localhost:3000', {
+    .post('https://gpt-server-c3mk.onrender.com', {
          message:message
     })
     
