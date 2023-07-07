@@ -34,7 +34,6 @@ app.post('/', async (req, res) => {
             { role: 'user', content: `${userMessage}` },
             { role: 'system', content: 'I am a tech support specialist and my job is to help anyone with any thechical problems no matter whats the issue' },
         ],
-        max_tokens: 100,
         temperature:1,
         
     })
