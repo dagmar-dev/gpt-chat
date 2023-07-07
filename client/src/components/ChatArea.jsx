@@ -14,7 +14,9 @@ export default function ChatArea(state) {
   const [newMessage,setNewMessage] = useState('')
   const [errorMsg,setErrotMsg] = useState("Type here")
 
-  const messages = useStore(store=>store.messages.toReversed())
+  const messages = useStore(store=>store.messages)
+  // const revMessages = [...messages].reverse()
+  
   const addMessage = useStore(store=>store.addMessage)
   
 
@@ -46,7 +48,7 @@ export default function ChatArea(state) {
     submitMessage()
     setNewMessage('')
     setErrotMsg('Type Here')
-    console.log(revMessages)
+    console.log(messages)
     }
     }
   }
@@ -88,7 +90,7 @@ axios
         key={index}
         message={messages.message}
         />}   
-})}
+}).reverse()}
 </AnimatePresence>
         </div>
          <MessageBox 
