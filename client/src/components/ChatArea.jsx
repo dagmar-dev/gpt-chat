@@ -62,7 +62,7 @@ axios
          message:message
     })
     
-    .then(function (response) {
+    .then( function(response) {
         addMessage('assistant',response.data.content,state)
         console.log(messages)
     })
@@ -75,9 +75,9 @@ axios
   
   return (
     
-    <section className="container min-h-screen items-center flex flex-col   p-4 ">
+    <section className="container min-h-screen items-center flex flex-col bg-neutral-focus lg:w-4/6 w-full px-4 py-2">
      
-      <div className="h-screen container overflow-auto px-2 py-3 lg:w-5/6 flex flex-col-reverse bg-neutral ">
+      <div className="h-screen container overflow-auto px-2 py-3 w-full flex flex-col-reverse  ">
         <AnimatePresence initial={false} >
       {messages.map((messages,index) => {
        
@@ -92,8 +92,8 @@ axios
         />}   
 }).reverse()}
 </AnimatePresence>
-        </div>
-         <MessageBox 
+        </div >
+         <MessageBox
           handleClick={handleClick}
           handleChange={handleChange}
           handleKeyDown={onKeyDown}

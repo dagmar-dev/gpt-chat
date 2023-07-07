@@ -6,7 +6,7 @@ import {AnimatePresence,motion} from "framer-motion"
 export default function Response(props) {
     return (
         
-        <div className="chat  chat-start">
+        <div className="chat   chat-start">
 
         
   <motion.div 
@@ -14,7 +14,7 @@ export default function Response(props) {
   animate={{ opacity:1, scale:1 }}
   transition={{ opacity: { duration:0.2 }}}
   
-  className="chat-bubble bg-base-100 "><p>{props.message}</p>
+  className="chat-bubble  bg-base-100 "><p>{props.message}</p>
   </motion.div>
   
 </div>
