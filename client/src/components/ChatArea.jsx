@@ -14,7 +14,7 @@ export default function ChatArea(state) {
   const [newMessage,setNewMessage] = useState('')
   const [errorMsg,setErrotMsg] = useState("Type here")
 
-  const messages = useStore(store=>store.messages)
+  const messages = useStore(store=>store.messages.toReversed())
   const addMessage = useStore(store=>store.addMessage)
   
 
@@ -46,6 +46,7 @@ export default function ChatArea(state) {
     submitMessage()
     setNewMessage('')
     setErrotMsg('Type Here')
+    console.log(revMessages)
     }
     }
   }
@@ -72,9 +73,9 @@ axios
   
   return (
     
-    <section className="container m-h-screen items-center flex flex-col   p-4 ">
+    <section className="container min-h-screen items-center flex flex-col   p-4 ">
      
-      <div className="h-screen container overflow-scroll px-2 py-3 w-5/6 flex flex-col justify-end bg-neutral ">
+      <div className="h-screen container overflow-auto px-2 py-3 lg:w-5/6 flex flex-col-reverse bg-neutral ">
         <AnimatePresence initial={false} >
       {messages.map((messages,index) => {
        

@@ -4,7 +4,7 @@ const store = (set)=>({
 messages:[
   {
     role:'assistant',
-      message:'Hi welcome to our bartending service'
+      message:'Welcome to our tech support service.'
   },
   
 ],
