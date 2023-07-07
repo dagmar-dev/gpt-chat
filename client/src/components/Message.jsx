@@ -11,7 +11,7 @@ export default function Message(props) {
   initial={{ opacity:0, scale:0}}
   animate={{ opacity:1, scale:1 }}
   transition={{ opacity: { duration:0.2 }}}
-  className="chat-bubble bg-base-100  ">{props.message}</motion.div>
+  className="chat-bubble whitespace-pre-line bg-base-100  ">{props.message}</motion.div>
   
 </div>
 
