@@ -9,6 +9,7 @@ import {AnimatePresence} from "framer-motion"
 
 
 
+
 export default function ChatArea(state) {
 
   const [newMessage,setNewMessage] = useState('')
@@ -53,7 +54,7 @@ export default function ChatArea(state) {
     }
   }
 
-  const submitMessage = () => {
+  const submitMessage =  () => {
   // const message = messages[messages.length-1].message
   const message = newMessage
   
@@ -75,9 +76,9 @@ axios
   
   return (
     
-    <section className="container min-h-screen items-center flex flex-col bg-neutral-focus lg:w-4/6 w-full px-4 py-2">
+    <section className="h-full flex flex-col  bg-neutral-focus lg:w-4/6 w-full px-4 py-2">
      
-      <div className="h-screen container overflow-auto px-2 py-3 w-full flex flex-col-reverse  ">
+      <div className="h-full container overflow-auto px-2 py-3 w-full flex flex-col-reverse  ">
         <AnimatePresence initial={false} >
       {messages.map((messages,index) => {
        
