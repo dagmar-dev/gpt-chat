@@ -17,13 +17,9 @@ function App() {
   
 
   return (
-    <div className='max-h-screen'>
+    <div className='max-h-screen flex flex-col items-center'>
     <Nav/>
-    {user ? (
-        <button onClick={handleLogout}>Sign Out</button>
-      ) : (
-        <button onClick={handleLogin}>Sign In</button>
-      )}
+    
     <Routes>
       <Route path="/" element={<Landing/>} />
       <Route path='/login' element={<Login user={user}/>}/>
@@ -34,7 +30,11 @@ function App() {
       <Route path="*" element={<NoMatch/>}/>
     </Routes>
     
-    
+    {user ? (
+        <button onClick={handleLogout}>Sign Out</button>
+      ) : (
+        <button onClick={handleLogin}>Sign In</button>
+      )}
     </div>
   )
 }

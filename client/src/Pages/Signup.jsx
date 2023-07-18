@@ -1,4 +1,4 @@
-import React from 'react'
+import {Link} from 'react-router-dom'
 
 export default function Signup() {
   return (
@@ -26,7 +26,7 @@ export default function Signup() {
           </label>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary my-1">Login</button>
+          <Link to="login" className="btn btn-primary my-1">Login</Link>
           <button className="btn btn-primary my-1">Google</button>
         </div>
       </div>

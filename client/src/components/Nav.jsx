@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function Nav({user}) {
   return (
-    <div className="navbar h-10 bg-base-100">
+    <div className="navbar container  h-10 bg-base-100">
   <div className="navbar-start">
     <div className="dropdown">
       <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -23,21 +23,14 @@ export default function Nav({user}) {
 
     <Link to='/' className="btn btn-ghost normal-case text-xl">Chat</Link>
   </div>
-  {/* <div className="navbar-center hidden lg:flex">
+  <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
       <li><a>Item 1</a></li>
-      <li tabIndex={0}>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </details>
-      </li>
+      <li><a>Item 2</a></li>
+     
       <li><a>Item 3</a></li>
     </ul>
-  </div> */}
+  </div>
   <div className="navbar-end">
     <Link to="login" className="btn">Login</Link>
     

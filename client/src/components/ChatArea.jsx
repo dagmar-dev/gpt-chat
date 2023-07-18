@@ -76,9 +76,9 @@ axios
   
   return (
     
-    <section className="h-full flex flex-col  bg-neutral-focus lg:w-4/6 w-full px-4 py-2">
+    <section className="h-full flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-2">
      
-      <div className="h-full container overflow-auto px-2 py-3 w-full flex flex-col-reverse  ">
+      <div className="h-full  overflow-auto px-1 py-3 w-full flex flex-col-reverse  ">
         <AnimatePresence initial={false} >
       {messages.map((messages,index) => {
        
