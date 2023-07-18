@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom'
 
+
 export default function Nav({user}) {
+   let button = ''
+    if (user === null){
+        button = 'login'
+    }else{button = 'sign out'}
+    
   return (
     <div className="navbar container  h-10 bg-base-100">
   <div className="navbar-start">
@@ -32,7 +38,7 @@ export default function Nav({user}) {
     </ul>
   </div>
   <div className="navbar-end">
-    <Link to="login" className="btn">Login</Link>
+    <Link to="login" className="btn">{button}</Link>
     
   </div>
 </div>

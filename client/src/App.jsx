@@ -5,8 +5,8 @@ import ChatLayout from './Pages/ChatLayout'
 import Landing from './Pages/Landing'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
-import NoMatch from './components/NoMatch'
-import ProtectedRoute from './components/ProtectedRoute'
+import Error404 from './components/Error404'
+import ProtectedRoute from './features/auth/ProtectedRoute'
 import { useState } from 'react'
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className='max-h-screen flex flex-col items-center'>
-    <Nav/>
+    <Nav user={user}/>
     
     <Routes>
       <Route path="/" element={<Landing/>} />
@@ -27,7 +27,7 @@ function App() {
       <Route element={<ProtectedRoute user={user}/>}>
         <Route path="/home" element={<ChatLayout/>}/>
       </Route>
-      <Route path="*" element={<NoMatch/>}/>
+      <Route path="*" element={<Error404/>}/>
     </Routes>
     
     {user ? (

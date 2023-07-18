@@ -1,30 +1,8 @@
-const express = require('express')
-const app = express()
-const port = 3300
-const cors = require('cors')
-require('dotenv').config()
-const { Configuration, OpenAIApi } = require('openai')
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-})
-const openai = new OpenAIApi(configuration)
+const openai = require('../config/openAi')
 
-app.use(cors())
 
-app.use(
-    cors({
-        origin: 'https://gpt-chat-front.onrender.com',
-    })
-)
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-app.get('/', (req, res) => {
-    res.send('gpt server')
-})
-
-app.post('/', async (req, res) => {
-     
+module.exports= {
+postMessage:  async (req, res) => {
     const userMessage = req.body.message
     console.log(req.body)
     try{
@@ -47,8 +25,5 @@ app.post('/', async (req, res) => {
     console.log(error.message);
   }
 }
-})
-
-app.listen(port, () => {
-    console.log(`CORS-enabled web server on port ${port}`)
-})
+}
+}
