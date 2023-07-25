@@ -8,6 +8,7 @@ const cors = require('cors')
 require('dotenv').config()
 const connectDB = require("./config/database")
 const mainRoutes =require("./routes/main")
+const messagesRoutes = require("./routes/messages")
 
 
 
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.use("/",mainRoutes)
+app.use("/",messagesRoutes)
 
 app.listen(port, () => {
     console.log(`CORS-enabled web server on port ${port}`)
