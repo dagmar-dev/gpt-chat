@@ -14,7 +14,7 @@ export default function Messages() {
                     return (
                         <SavedMessage title={savedMessages.title} key={index} />
                     )
-                })}
+                }).reverse()}
             </ul>
             <NewChat />
             <SaveDeleteChat />

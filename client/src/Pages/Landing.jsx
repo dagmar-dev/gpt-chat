@@ -1,6 +1,19 @@
 import {Link} from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { getAwake} from '../api/newMessage'
 
 export default function Landing() {
+  
+
+  const {
+    isLoading,
+    isError,
+    error,
+   
+  } = useQuery({ queryKey: ['alive'], queryFn:getAwake})
+
+  
+
   return (
     <div className="hero min-h-screen bg-base-200">
   <div className="hero-content text-center">

@@ -2,9 +2,11 @@ import { useStore } from '../app/store'
 
 export default function NewChat(state) {
     const deleteMessages = useStore((store) => store.deleteMessages)
+    const addMessage = useStore((store) => store.addMessage)
     
     const newChat = () => {
         deleteMessages(state)
+        addMessage('assistant', 'Welcome to our tech support service.', state)
         
     }
     return (

@@ -2,6 +2,8 @@ import Message from './Message'
 import Response from './Response'
 import MessageBox from './MessageBox'
 import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import { getAwake } from '../api/newMessage'
 import { useStore } from '../app/store'
 import { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
@@ -13,7 +15,9 @@ export default function ChatArea(state) {
     const messages = useStore((store) => store.messages)
 
     const addMessage = useStore((store) => store.addMessage)
+
     
+
     const handleChange = (e) => {
         setNewMessage(e.target.value)
     }
@@ -45,16 +49,15 @@ export default function ChatArea(state) {
 
     const submitMessage = () => {
         // const message = messages[messages.length-1].message
-        const message = newMessage
-
+        const message = newMessage + conversation 
+console.log(conversation)
         axios
-            .post('https://gpt-server-c3mk.onrender.com/message', {
+            .post('http://localhost:3300/message', {
                 message: message,
             })
 
             .then(function (response) {
                 addMessage('assistant', response.data.content, state)
-                console.log(messages)
             })
             .catch(function (error) {
                 console.log(error)

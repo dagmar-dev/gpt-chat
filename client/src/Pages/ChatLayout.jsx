@@ -1,5 +1,5 @@
 import ChatArea from '../components/ChatArea'
-import Messages from '../components/SavedMessages'
+import Messages from '../components/SavedMessagesArea'
 
 
 

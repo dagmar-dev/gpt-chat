@@ -16,7 +16,7 @@ app.use(cors())
 
 app.use(
     cors({
-        origin: 'https://gpt-chat-front.onrender.com',
+        origin: 'http://localhost:5173',
     })
 )
 

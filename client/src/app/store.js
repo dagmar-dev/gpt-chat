@@ -32,7 +32,7 @@ const store = (set) => ({
 
     deleteMessages: () =>
         set((store) => ({
-            savedMessages: [
+            messages: [
                 ...store.messages=[]
                 
             ],
