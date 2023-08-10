@@ -1,5 +1,5 @@
 import { api } from './config/axiosConfig'
-import { useStore } from '../app/store'
+
 
 
 
@@ -8,17 +8,21 @@ export const getAwake = async () => {
     return response.data
 }
 
-export const postMessage = async () => {
-    await api
+export const postMessage = async (clientMessage) => {
+    const response = await api
         .post('/message', {
-            message: 'hi',
+            message: clientMessage,
         })
-        .then(function (response) {
-            console.log(response.data.content)
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+
+        return response.data.content
+
+
+        // .then(function (response) {
+        //     console.log(response.data.content)
+        // })
+        // .catch(function (error) {
+        //     console.log(error)
+        // })
 }
 
 

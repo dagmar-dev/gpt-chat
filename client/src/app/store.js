@@ -9,9 +9,17 @@ const store = (set) => ({
     ],
     savedMessages: [
         {
-            title: 'First Message',
+            title: '',
         },
     ],
+
+    alert: [
+        {
+            response: '',
+            message: '',
+        },
+    ],
+
     login: true,
     loginUser: () =>
         set((state) => ({
@@ -32,11 +40,8 @@ const store = (set) => ({
 
     deleteMessages: () =>
         set((store) => ({
-            messages: [
-                ...store.messages=[]
-                
-            ],
+            messages: [...(store.messages = [])],
         })),
 })
- 
+
 export const useStore = create(store)

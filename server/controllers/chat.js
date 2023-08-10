@@ -2,8 +2,8 @@ const openai = require('../config/openAi')
 
 module.exports = {
     postMessage: async (req, res) => {
-        const userMessage = req.body.message
-        console.log(req.body)
+        const userMessage = req.body.message.clientMessage
+        console.log(userMessage)
         try {
             const completion = await openai.createChatCompletion({
                 model: 'gpt-3.5-turbo',
@@ -12,7 +12,7 @@ module.exports = {
                     {
                         role: 'system',
                         content:
-                            'I am a tech support specialist and my job is to help anyone with any thechical problems no matter whats the issue',
+                            'I am a tech support specialist and my job is to help anyone with any thechnical problems no matter whats the issue',
                     },
                 ],
                 temperature: 1,

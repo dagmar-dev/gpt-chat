@@ -1,4 +1,4 @@
-
+import Alert from '../components/Alert'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../app/store'
 
@@ -12,7 +12,7 @@ export default function Login() {
     }
     
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen flex flex-col justify-around bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Login now!</h1>
@@ -73,6 +73,7 @@ export default function Login() {
                     </div>
                 </div>
             </div>
+            <Alert/>
         </div>
     )
 }

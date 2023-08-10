@@ -1,12 +1,20 @@
 import Message from './Message'
 import Response from './Response'
 import MessageBox from './MessageBox'
-import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
-import { getAwake } from '../api/newMessage'
+
+
+import {
+    useQuery,
+    useMutation,
+    useQueryClient,
+    QueryClient,
+    QueryClientProvider,
+} from '@tanstack/react-query'
+import { postMessage } from '../api/newMessage'
 import { useStore } from '../app/store'
 import { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
+
 
 export default function ChatArea(state) {
     const [newMessage, setNewMessage] = useState('')
@@ -16,7 +24,16 @@ export default function ChatArea(state) {
 
     const addMessage = useStore((store) => store.addMessage)
 
-    
+    const queryClient = useQueryClient()
+
+    const mutation = useMutation({
+        mutationFn:postMessage,
+        onSuccess: (response) => {
+            queryClient.setQueryData(['response' ],response)
+            queryClient.invalidateQueries({ queryKey: ['clientMessage'] })
+            addMessage('assistant', response, state)
+        }
+    })
 
     const handleChange = (e) => {
         setNewMessage(e.target.value)
@@ -42,26 +59,15 @@ export default function ChatArea(state) {
                 submitMessage()
                 setNewMessage('')
                 setErrorMsg('Type Here')
-                console.log(messages)
+                
             }
         }
     }
 
     const submitMessage = () => {
-        // const message = messages[messages.length-1].message
-        const message = newMessage + conversation 
-console.log(conversation)
-        axios
-            .post('http://localhost:3300/message', {
-                message: message,
-            })
-
-            .then(function (response) {
-                addMessage('assistant', response.data.content, state)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
+        mutation.mutate({
+            clientMessage:newMessage
+        })
     }
 
     
@@ -90,7 +96,9 @@ console.log(conversation)
                         })
                         .reverse()}
                 </AnimatePresence>
+                
             </div>
+
             <MessageBox
                 handleClick={handleClick}
                 handleChange={handleChange}

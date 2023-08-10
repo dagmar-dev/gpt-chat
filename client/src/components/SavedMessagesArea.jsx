@@ -1,23 +1,37 @@
 import SavedMessage from './SavedMessage'
 import { useStore } from '../app/store'
-import SaveDeleteChat from './SaveDeleteChat'
 import NewChat from './NewChat'
+import SaveMessagesModal from './SaveMessagesModal'
+import Alert from './Alert'
 
 export default function Messages() {
     const savedMessages = useStore((store) => store.savedMessages)
 
     return (
         <section className="bg-neutral gap-1 flex flex-col items-center justify-between p-4  md:w-1/5 w-full h-full">
-            
             <ul className="w-full h-full flex flex-col items-center">
-                {savedMessages.map((savedMessages, index) => {
-                    return (
-                        <SavedMessage title={savedMessages.title} key={index} />
-                    )
-                }).reverse()}
+                {savedMessages
+                    .map((savedMessages, index) => {
+                        if (savedMessages.title === ''){
+                            return (
+                                <SavedMessage
+                                    title='No Messages'
+                                    key={index}
+                                />
+                            )
+                        }else return (
+                            <SavedMessage
+                                title={savedMessages.title}
+                                key={index}
+                            />
+                        )
+                    })
+                    .reverse()}
             </ul>
+            <Alert />
             <NewChat />
-            <SaveDeleteChat />
+            
+            <SaveMessagesModal />
         </section>
     )
 }

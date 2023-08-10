@@ -9,7 +9,7 @@ export default function Landing() {
     isLoading,
     isError,
     error,
-   
+ 
   } = useQuery({ queryKey: ['alive'], queryFn:getAwake})
 
   
