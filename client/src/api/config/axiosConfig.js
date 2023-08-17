@@ -1,8 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-
-    baseURL: 'http://localhost:3300',
+    baseURL: 'https://gpt-server-c3mk.onrender.com:3300',
 })
 
 // defining a custom error handler for all APIs
