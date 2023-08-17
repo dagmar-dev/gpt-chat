@@ -3,12 +3,14 @@ import { api } from './config/axiosConfig'
 
 
 
+
 export const getAwake = async () => {
     const response = await api.get('/')
     return response.data
 }
 
 export const postMessage = async (clientMessage) => {
+    
     const response = await api
         .post('/message', {
             message: clientMessage,

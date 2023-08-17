@@ -18,7 +18,7 @@ module.exports = {
                 temperature: 1,
             })
             res.json(completion.data.choices[0].message)
-            console.log(completion.data.choices[0].message)
+            
         } catch (error) {
             if (error.response) {
                 console.log(error.response.status)

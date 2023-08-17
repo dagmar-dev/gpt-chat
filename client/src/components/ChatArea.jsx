@@ -1,22 +1,14 @@
 import Message from './Message'
 import Response from './Response'
 import MessageBox from './MessageBox'
-
-
-import {
-    useQuery,
-    useMutation,
-    useQueryClient,
-    QueryClient,
-    QueryClientProvider,
-} from '@tanstack/react-query'
-import { postMessage } from '../api/newMessage'
+import MessageLoading from './MessageLoading'
 import { useStore } from '../app/store'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
-
+import { socket } from '../web socket/socket'
 
 export default function ChatArea(state) {
+    const [fooEvents, setFooEvents] = useState([])
     const [newMessage, setNewMessage] = useState('')
     const [errorMsg, setErrorMsg] = useState('Type here')
 
@@ -24,16 +16,6 @@ export default function ChatArea(state) {
 
     const addMessage = useStore((store) => store.addMessage)
 
-    const queryClient = useQueryClient()
-
-    const mutation = useMutation({
-        mutationFn:postMessage,
-        onSuccess: (response) => {
-            queryClient.setQueryData(['response' ],response)
-            queryClient.invalidateQueries({ queryKey: ['clientMessage'] })
-            addMessage('assistant', response, state)
-        }
-    })
 
     const handleChange = (e) => {
         setNewMessage(e.target.value)
@@ -59,23 +41,48 @@ export default function ChatArea(state) {
                 submitMessage()
                 setNewMessage('')
                 setErrorMsg('Type Here')
-                
             }
         }
     }
 
     const submitMessage = () => {
-        mutation.mutate({
-            clientMessage:newMessage
-        })
+        socket.emit('message', newMessage)
+        console.log(messages)
+        
     }
 
-    
+    useEffect(() => {
+        function onConnect() {
+            console.log('connected')
+            socket.on('response', (data) => {
+                addMessage('assistant', data, state)
+            })
+        }
+        
+        function onDisconnect() {
+            console.log('disconnected')
+        }
+
+        function onFooEvent(value) {
+            setFooEvents((previous) => [...previous, value])
+        }
+
+        socket.on('connect', onConnect)
+        socket.on('disconnect', onDisconnect)
+        socket.on('foo', onFooEvent)
+
+        return () => {
+            socket.off('connect', onConnect)
+            socket.off('disconnect', onDisconnect)
+            socket.off('foo', onFooEvent)
+        }
+    }, [addMessage,state])
 
     return (
         <section className="h-full md:flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-2 hidden">
             <div className="h-full  overflow-auto px-1 py-3 w-full flex flex-col-reverse  ">
                 <AnimatePresence initial={false}>
+                    {/* <MessageLoading loading={isLoading} /> */}
                     {messages
                         .map((messages, index) => {
                             if (messages.role === 'client') {
@@ -85,7 +92,7 @@ export default function ChatArea(state) {
                                         message={messages.message}
                                     />
                                 )
-                            } else {
+                            } else if (messages.role === 'assistant') {
                                 return (
                                     <Response
                                         key={index}
@@ -96,7 +103,6 @@ export default function ChatArea(state) {
                         })
                         .reverse()}
                 </AnimatePresence>
-                
             </div>
 
             <MessageBox

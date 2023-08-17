@@ -7,7 +7,7 @@ module.exports = {
             res.json(messages)
             console.log('messages')
         } catch (err) {
-            console.log(err)
+            
         }
     },
     getMessages: async (req,res) =>{

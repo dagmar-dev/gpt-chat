@@ -10,9 +10,15 @@ import ProtectedRoute from './features/auth/ProtectedRoute'
 
 
 
+
 function App() {
+
+
+
+  
   return (
     <div className='max-h-screen flex flex-col items-center'>
+      
     <Nav/>
     
     <Routes>
