@@ -16,7 +16,7 @@ const openai = require('./config/openAi')
 
 const io = new Server(httpServer, {
     cors: {
-        origin: 'https://gpt-chat-front.onrender.com',
+        origin:process.env.CLIENT_URL,
     },
 })
 
