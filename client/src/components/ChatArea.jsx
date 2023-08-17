@@ -81,7 +81,7 @@ export default function ChatArea(state) {
     }, [addMessage,state])
 
     return (
-        <section className="h-full md:flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-2 hidden">
+        <section className="h-full flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-2 ">
             <div className="h-full  overflow-auto px-1 py-3 w-full flex flex-col-reverse  ">
                 <AnimatePresence initial={false}>
                     {/* <MessageLoading loading={isLoading} /> */}
