@@ -30,31 +30,24 @@ connectDB()
 
 io.on('connection',  (socket)  => {
     console.log(`New connection\n ID: ${socket.id}`)
-    // socket.emit('response', 
-    //         // messages = [
-                
-                
-    //         //         content=
-    //         //             'I am a tech support specialist and my job is to help anyone with any thechnical problems no matter whats the issue',
-    //         //     ,
-    //         // ],
+    socket.emit('response', 
+           
         
-    // )
+            'Welcome to our tech support service'
+        
+          
+        
+        
+    )
     socket.on('disconnect', () => {
         console.log('client disconnected')
     })
-    socket.on('message', async (data) => {
+    socket.on('messages', async (data) => {
          try {
+            console.log(data)
             const completion = await openai.createChatCompletion({
-                model: 'gpt-3.5-turbo',
-                messages: [
-                    { role: 'user', content:data },
-                    {
-                        role: 'system',
-                        content:
-                            'I am a tech support specialist and my job is to help anyone with any thechnical problems no matter whats the issue',
-                    },
-                ],
+                model: 'gpt-3.5-turbo-16k-0613',
+                messages: data,
                 temperature: 1,
             })
             socket.emit(

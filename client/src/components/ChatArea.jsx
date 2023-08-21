@@ -37,7 +37,7 @@ export default function ChatArea(state) {
             if (newMessage === '') {
                 setErrorMsg('Please Enter a Message')
             } else {
-                addMessage('client', newMessage, state)
+                addMessage('user', newMessage, state)
                 submitMessage()
                 setNewMessage('')
                 setErrorMsg('Type Here')
@@ -45,11 +45,19 @@ export default function ChatArea(state) {
         }
     }
 
+     const userMessage = {
+         role: 'user',
+         content: newMessage,
+     }
+    const conversation = [...messages,userMessage]
+   
+
     const submitMessage = () => {
-        socket.emit('message', newMessage)
-        console.log(messages)
-        
+        socket.emit(
+            'messages', conversation)
+        console.log(conversation)
     }
+    
 
     useEffect(() => {
         function onConnect() {
@@ -87,18 +95,18 @@ export default function ChatArea(state) {
                     {/* <MessageLoading loading={isLoading} /> */}
                     {messages
                         .map((messages, index) => {
-                            if (messages.role === 'client') {
+                            if (messages.role === 'user') {
                                 return (
                                     <Message
                                         key={index}
-                                        message={messages.message}
+                                        message={messages.content}
                                     />
                                 )
                             } else if (messages.role === 'assistant') {
                                 return (
                                     <Response
                                         key={index}
-                                        message={messages.message}
+                                        message={messages.content}
                                     />
                                 )
                             }

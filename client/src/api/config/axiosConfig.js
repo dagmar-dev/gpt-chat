@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL:'https://gpt-server-c3mk.onrender.com',
+    baseURL: 'https://gpt-chat-front.onrender.com',
 })
 
 // defining a custom error handler for all APIs
