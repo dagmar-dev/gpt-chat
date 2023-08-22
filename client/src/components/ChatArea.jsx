@@ -65,15 +65,12 @@ export default function ChatArea(state) {
             console.log('connected')
         }
         socket.on('response', (data) => {
-            addMessage('assistant', data, state)
+            addMessage('assistant', data)
         })
 
-        socket.on('loading', (data) => {
-            setLoading(`${data}`)
-        })
-
-        
-        
+        // socket.on('loading', (data) => {
+        //     setLoading(`${data}`)
+        // })
 
         function onDisconnect() {
             console.log('disconnected')
