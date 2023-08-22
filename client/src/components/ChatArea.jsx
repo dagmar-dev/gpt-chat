@@ -26,7 +26,7 @@ export default function ChatArea(state) {
         if (newMessage === '') {
             setErrorMsg('Please Enter a Message')
         } else {
-            addMessage('client', newMessage, state)
+            addMessage('user', newMessage, state)
             submitMessage()
             setNewMessage('')
             setErrorMsg('Type Here')
