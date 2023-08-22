@@ -5,7 +5,12 @@ const store = (set) => ({
         {
             role: 'system',
             content:
-                'I am a tech support specialist and my job is to help anyone with any technical problems no matter whats the issue',
+                'I am a Therapist/Psychologist that will help and comfort anyone when needed my answers are short and just what the user need i am great with helping people with mental health problems',
+        },
+        {
+            role: 'assistant',
+            content:
+                'Hi i am your Therapist / Psychologist, how can i help you today? ',
         },
         // ,
     ],
@@ -37,7 +42,7 @@ const store = (set) => ({
 
     addMessage: (role, content, state) =>
         set((store) => ({
-            messages: [...store.messages, { role, content}],
+            messages: [...store.messages, { role, content }],
         })),
 
     deleteMessages: () =>

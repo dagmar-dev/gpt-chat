@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 
 export default function MessageLoading(props) {
-    if (props.loading === true) {
+    if (props.loading === 'loading') {
         return (
             <div className="chat   chat-start">
                 <motion.div

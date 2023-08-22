@@ -11,6 +11,7 @@ export default function ChatArea(state) {
     const [fooEvents, setFooEvents] = useState([])
     const [newMessage, setNewMessage] = useState('')
     const [errorMsg, setErrorMsg] = useState('Type here')
+    const [loading,setLoading] = useState('')
 
     const messages = useStore((store) => store.messages)
 
@@ -62,13 +63,20 @@ export default function ChatArea(state) {
     useEffect(() => {
         function onConnect() {
             console.log('connected')
+
+            socket.on('response', (data) => {
+                addMessage('assistant', data, state)
+            })
             
         }
 
-        socket.on('response', (data) => {
-            addMessage('assistant', data, state)
+        socket.on('loading', (data) => {
+            setLoading(`${data}`)
         })
+
         
+        
+
         function onDisconnect() {
             console.log('disconnected')
         }
@@ -86,13 +94,13 @@ export default function ChatArea(state) {
             socket.off('disconnect', onDisconnect)
             socket.off('foo', onFooEvent)
         }
-    }, [addMessage,state])
+    }, [addMessage,state,setLoading,loading])
 
     return (
         <section className="h-full flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-2 ">
             <div className="h-full  overflow-auto px-1 py-3 w-full flex flex-col-reverse  ">
                 <AnimatePresence initial={false}>
-                    {/* <MessageLoading loading={isLoading} /> */}
+                    <MessageLoading loading={loading} />
                     {messages
                         .map((messages, index) => {
                             if (messages.role === 'user') {
