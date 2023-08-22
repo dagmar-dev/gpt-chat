@@ -46,20 +46,20 @@ io.on('connection',  (socket)  => {
         
         try {
             socket.emit('loading', 'loading',
-            console.log('loading')
             )
          const completion = await openai.createChatCompletion({
                 model: 'gpt-3.5-turbo-16k-0613',
                 messages: data,
                 temperature: 1,
             })
+            console.log(data)
             socket.emit(
                 'loading','not loading',
-                console.log('finished loading')
+                
             )
             socket.emit(
                 'response',completion.data.choices[0].message.content,
-                console.log(completion.data.choices[0].message.content),
+                console.log(`This is a bot response: ${completion.data.choices[0].message.content}`),
             )
             
         } catch (error) {
