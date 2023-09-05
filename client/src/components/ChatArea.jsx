@@ -65,11 +65,13 @@ export default function ChatArea(state) {
     useEffect(() => {
         function onConnect() {
             updateStatus('connected', state)
-            socket.on('response', (data) => {
-                updateStatus('connected', state)
-                addMessage('assistant', data)
-            })
+            
         }
+
+        socket.on('response', (data) => {
+            updateStatus('connected', state)
+            addMessage('assistant', data)
+        })
 
         // socket.on('loading', (data) => {
         //     setLoading(`${data}`)
