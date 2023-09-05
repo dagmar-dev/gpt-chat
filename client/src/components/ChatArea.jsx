@@ -64,14 +64,10 @@ export default function ChatArea(state) {
 
     useEffect(() => {
         function onConnect() {
-            updateStatus('connected', state)
             console.log('connected')
         }
-
         socket.on('response', (data) => {
             addMessage('assistant', data)
-            updateStatus('connected', state)
-            console.log('success')
         })
 
         // socket.on('loading', (data) => {
@@ -79,8 +75,11 @@ export default function ChatArea(state) {
         // })
 
         function onDisconnect() {
-            updateStatus('disconnected', state)
             console.log('disconnected')
+        }
+
+        function onFooEvent(value) {
+            setFooEvents((previous) => [...previous, value])
         }
 
         socket.on('connect', onConnect)
