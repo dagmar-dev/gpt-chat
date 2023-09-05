@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-
+import ServerStatus from './ServerStatus'
 export default function Nav({ user }) {
     let button = ''
     if (user === null) {
@@ -75,7 +75,9 @@ export default function Nav({ user }) {
                   </li>
               </ul> */}
             </div>
+
             <div className="navbar-end">
+                <ServerStatus />
                 <Link to="login" className="btn hidden md:flex">
                     {button}
                 </Link>

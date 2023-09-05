@@ -26,6 +26,15 @@ const store = (set) => ({
             message: '',
         },
     ],
+    severStatus: [
+        {
+            status: '',
+        },
+    ],
+    updateStatus: (status, state) =>
+        set((store) => ({
+            severStatus: [...store.severStatus, { status, state }],
+        })),
 
     login: true,
     loginUser: () =>

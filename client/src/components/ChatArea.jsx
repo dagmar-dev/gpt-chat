@@ -8,15 +8,16 @@ import { AnimatePresence } from 'framer-motion'
 import { socket } from '../web socket/socket'
 
 export default function ChatArea(state) {
-    const [fooEvents, setFooEvents] = useState([])
     const [newMessage, setNewMessage] = useState('')
     const [errorMsg, setErrorMsg] = useState('Type here')
-    const [loading,setLoading] = useState('')
+    const [loading, setLoading] = useState('')
 
     const messages = useStore((store) => store.messages)
+    const serverStatus = useStore((store) => store.severStatus)
+    const status = serverStatus[serverStatus.length - 1]
 
     const addMessage = useStore((store) => store.addMessage)
-
+    const updateStatus = useStore((store) => store.updateStatus)
 
     const handleChange = (e) => {
         setNewMessage(e.target.value)
@@ -27,9 +28,11 @@ export default function ChatArea(state) {
             setErrorMsg('Please Enter a Message')
         } else {
             addMessage('user', newMessage, state)
+            console.log(serverStatus)
             submitMessage()
             setNewMessage('')
             setErrorMsg('Type Here')
+            updateStatus('processing', state)
         }
     }
 
@@ -42,54 +45,48 @@ export default function ChatArea(state) {
                 submitMessage()
                 setNewMessage('')
                 setErrorMsg('Type Here')
+                updateStatus('processing', state)
             }
         }
     }
 
-     const userMessage = {
-         role: 'user',
-         content: newMessage,
-     }
-    const conversation = [...messages,userMessage]
-   
+    const userMessage = {
+        role: 'user',
+        content: newMessage,
+    }
 
     const submitMessage = () => {
-        socket.emit(
-            'messages', conversation)
-        console.log(conversation)
+        if(status === 'disconnected'){
+            return 'server disconnected'
+        }else socket.emit('messages', [...messages, userMessage])
+        
     }
-    
 
     useEffect(() => {
         function onConnect() {
-            console.log('connected')
+            updateStatus('connected', state)
+            socket.on('response', (data) => {
+                updateStatus('connected', state)
+                addMessage('assistant', data)
+            })
         }
-        socket.on('response', (data) => {
-            addMessage('assistant', data)
-        })
 
         // socket.on('loading', (data) => {
         //     setLoading(`${data}`)
         // })
 
         function onDisconnect() {
-            console.log('disconnected')
-        }
-
-        function onFooEvent(value) {
-            setFooEvents((previous) => [...previous, value])
+            updateStatus('disconnected', state)
         }
 
         socket.on('connect', onConnect)
         socket.on('disconnect', onDisconnect)
-        socket.on('foo', onFooEvent)
 
         return () => {
             socket.off('connect', onConnect)
             socket.off('disconnect', onDisconnect)
-            socket.off('foo', onFooEvent)
         }
-    }, [addMessage,state,setLoading,loading])
+    }, [addMessage, state, setLoading, loading, updateStatus])
 
     return (
         <section className="h-full flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-2 ">

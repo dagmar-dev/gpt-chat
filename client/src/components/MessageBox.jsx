@@ -5,6 +5,7 @@ import { RxPaperPlane } from 'react-icons/rx'
 export default function MessageBox(props) {
     return (
         <div className=" w-full flex p-1 lg:py-3 justify-center items-center flex-row gap-2 ">
+            
             <input
                 type="text"
                 placeholder={props.errorPlaceholder}
