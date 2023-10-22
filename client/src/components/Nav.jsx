@@ -1,12 +1,8 @@
 import { Link } from 'react-router-dom'
+import { UserButton, SignedOut } from '@clerk/clerk-react'
 import ServerStatus from './ServerStatus'
-export default function Nav({ user }) {
-    let button = ''
-    if (user === null) {
-        button = 'login'
-    } else {
-        button = 'sign out'
-    }
+export default function Nav() {
+    let button = 'Login'
 
     return (
         <div className="navbar container  h-10 bg-base-100">
@@ -49,9 +45,12 @@ export default function Nav({ user }) {
                         <li>
                             <a>Item 3</a>
                         </li>
-                        <Link to="login" className="btn">
-                            {button}
-                        </Link>
+                        <ServerStatus />
+                        <SignedOut>
+                            <Link to="/login" className="btn">
+                                {button}
+                            </Link>
+                        </SignedOut>
                     </ul>
                 </div>
 
@@ -59,6 +58,7 @@ export default function Nav({ user }) {
                     Chat
                 </Link>
             </div>
+
             <div className="navbar-center hidden lg:flex">
                 {/* <ul className="menu menu-horizontal px-1">
                   <li>
@@ -78,9 +78,12 @@ export default function Nav({ user }) {
 
             <div className="navbar-end">
                 <ServerStatus />
-                <Link to="login" className="btn hidden md:flex">
-                    {button}
-                </Link>
+                <SignedOut>
+                    <Link to="/login" className="btn hidden md:flex">
+                        {button}
+                    </Link>
+                </SignedOut>
+                <UserButton />
             </div>
         </div>
     )

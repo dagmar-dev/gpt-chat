@@ -1,9 +1,10 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: 'https://gpt-chat-front.onrender.com',
+    baseURL: import.meta.env.VITE_API_URL,
 })
 
+//'https://gpt-chat-front.onrender.com'
 // defining a custom error handler for all APIs
 const errorHandler = (error) => {
     const statusCode = error.response?.status

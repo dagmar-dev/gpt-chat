@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getAwake } from '../api/newMessage'
-
+import { SignedIn, SignedOut } from '@clerk/clerk-react'
 
 
 export default function Landing() {
@@ -37,9 +37,17 @@ export default function Landing() {
                         assumenda excepturi exercitationem quasi. In deleniti
                         eaque aut repudiandae et a id nisi.
                     </p>
-                    <Link to="/signup" className="btn btn-primary">
-                        Get Started
-                    </Link>
+                    <SignedOut>
+                        <Link to="/signup" className="btn btn-primary">
+                            Get Started
+                        </Link>
+                    </SignedOut>
+
+                    <SignedIn>
+                        <Link to="/chat" className="btn btn-primary">
+                            Get Started
+                        </Link>
+                    </SignedIn>
                 </div>
             </div>
         </div>
