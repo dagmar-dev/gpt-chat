@@ -63,6 +63,8 @@ export default function ChatArea(state) {
     }
 
     useEffect(() => {
+        socket.connect()
+        socket.on('connect', onConnect)
         function onConnect() {
             console.log('connected')
             updateStatus('connected', state)
