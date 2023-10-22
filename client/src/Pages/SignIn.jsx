@@ -22,7 +22,7 @@ export default function Page() {
                     </div>
                 </div>
             </div>
-            # Hero with overlay image
+            
         </>
     )
 }
