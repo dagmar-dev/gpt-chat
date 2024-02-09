@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { socket } from '../web socket/socket'
 
+
 export default function ChatArea(state) {
     const [newMessage, setNewMessage] = useState('')
     const [errorMsg, setErrorMsg] = useState('Type here')
@@ -93,8 +94,8 @@ export default function ChatArea(state) {
     }, [addMessage, state, setLoading, loading, updateStatus])
 
     return (
-        <section className="h-full flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-2 ">
-            <div className="h-full  overflow-auto px-1 py-3 w-full flex flex-col-reverse  ">
+        <section className="h-full   flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-1 pt-12 ">
+            <div className="h-full  overflow-auto px-1 py-3 w-full flex flex-col-reverse pt-5 ">
                 <AnimatePresence initial={false}>
                     <MessageLoading loading={loading} />
                     {messages

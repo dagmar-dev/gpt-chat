@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getAwake } from '../api/newMessage'
-import { SignedIn, SignedOut } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
 
 
 export default function Landing() {
@@ -37,15 +37,28 @@ export default function Landing() {
                         assumenda excepturi exercitationem quasi. In deleniti
                         eaque aut repudiandae et a id nisi.
                     </p>
-                    <SignedOut>
-                        <Link to="/signup" className="btn btn-primary">
-                            Get Started
-                        </Link>
-                    </SignedOut>
+                    <div className="flex flex-col md:flex-row gap-2 justify-center items-center">
+                        <SignedOut>
+                            <Link
+                                to="/signup"
+                                className="btn btn-primary max-w-fit"
+                            >
+                                Get Started
+                            </Link>
+                        </SignedOut>
+                        <SignedOut>
+                            <Link
+                                to="/login"
+                                className="btn btn-secondary max-w-fit"
+                            >
+                                Login
+                            </Link>
+                        </SignedOut>
+                    </div>
 
                     <SignedIn>
-                        <Link to="/chat" className="btn btn-primary">
-                            Get Started
+                        <Link to="/chat" className="btn btn-primary max-w-fit">
+                            Chat
                         </Link>
                     </SignedIn>
                 </div>
