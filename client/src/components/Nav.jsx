@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom'
 import { UserButton, SignedOut } from '@clerk/clerk-react'
 import ServerStatus from './ServerStatus'
+
+
 export default function Nav() {
     let button = 'Login'
 
     return (
         <div className="navbar container fixed top-0 z-10 h-10 bg-base-100">
             <div className="navbar-start">
-                <div className="dropdown">
+                {/* <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -45,17 +47,17 @@ export default function Nav() {
                         <li>
                             <a>Item 3</a>
                         </li>
-                        <ServerStatus />
+                        
                         <SignedOut>
                             <Link to="/login" className="btn">
                                 {button}
                             </Link>
                         </SignedOut>
                     </ul>
-                </div>
+                </div> */}
 
                 <Link to="/" className="btn btn-ghost normal-case text-xl">
-                    Chat
+                    MindMate
                 </Link>
             </div>
 

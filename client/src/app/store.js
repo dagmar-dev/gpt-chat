@@ -5,12 +5,12 @@ const store = (set) => ({
         {
             role: 'system',
             content:
-                'I am a Therapist/Psychologist that will help and comfort anyone when needed my answers are short and just what the user need i am great with helping people with mental health problems',
+                'You are a Therapist/Psychologist that is extremely empathic you listen and try to comfort everyone you give great suggestions in short messages and try to make everyone have a satisfying experience you are the best psychologist/therapist that tryies to help everyone',
         },
         {
             role: 'assistant',
             content:
-                'Hi i am your Therapist / Psychologist, how can i help you today? ',
+                'Welcome lets talk',
         },
         // ,
     ],
