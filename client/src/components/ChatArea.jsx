@@ -66,6 +66,9 @@ export default function ChatArea(state) {
     useEffect(() => {
         socket.connect()
         socket.on('connect', onConnect)
+        socket.on('disconnect', onDisconnect)
+        socket.on('response',onResponse)
+        
         function onConnect() {
             console.log('connected')
             updateStatus('connected', state)
@@ -74,26 +77,24 @@ export default function ChatArea(state) {
             // })
         }
 
-        socket.on('response', (data) => {
+        function onResponse(data){
             updateStatus('connected', state)
             addMessage('assistant', data)
-            return () => {
-                socket.off('response')
-            }
-        },[messages])
-
+        }
+        
         function onDisconnect() {
             console.log('disconnected')
             updateStatus('disconnected', state)
         }
-        socket.on('connect', onConnect)
-        socket.on('disconnect', onDisconnect)
+        
+        
 
         return () => {
             socket.off('connect', onConnect)
             socket.off('disconnect', onDisconnect)
+            socket.off('response')
         }
-    }, [state, addMessage, setLoading, loading, updateStatus])
+    }, [state, addMessage, setLoading, loading, updateStatus,])
 
     return (
         <section className=" h-full  h-dvh flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-1 pt-12 ">
