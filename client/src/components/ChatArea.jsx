@@ -69,18 +69,18 @@ export default function ChatArea(state) {
         function onConnect() {
             console.log('connected')
             updateStatus('connected', state)
-            socket.on('response', (data) => {
-                addMessage('assistant', data)
-                updateStatus('connected', state)
-            })
-            socket.on('loading', (data) => {
-                setLoading(`${data}`)
-            })
+            // socket.on('loading', (data) => {
+            //     setLoading(`${data}`)
+            // })
         }
-        
-        
 
-        
+        socket.on('response', (data) => {
+            updateStatus('connected', state)
+            addMessage('assistant', data)
+            return () => {
+                socket.off('response')
+            }
+        },[messages])
 
         function onDisconnect() {
             console.log('disconnected')
@@ -93,7 +93,7 @@ export default function ChatArea(state) {
             socket.off('connect', onConnect)
             socket.off('disconnect', onDisconnect)
         }
-    }, [addMessage, state, setLoading, loading, updateStatus])
+    }, [state, addMessage, setLoading, loading, updateStatus])
 
     return (
         <section className=" h-full  h-dvh flex flex-col items-center  bg-neutral-focus lg:w-3/6 w-full px-1 md:px-2 lg:px-4 py-1 pt-12 ">
