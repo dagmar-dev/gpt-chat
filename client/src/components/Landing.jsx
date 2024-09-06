@@ -28,6 +28,7 @@ export default function Landing() {
     })
 
     return (
+        
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content text-center">
                 <div className="max-w-md">
@@ -35,7 +36,7 @@ export default function Landing() {
                         Your Confidential Companion
                     </h1>
                     <p className="py-6">
-                    Instantly connect with your empathetic AI friend. Share
+                        Instantly connect with your empathetic AI friend. Share
                         your deepest thoughts and emotions, knowing you're not
                         alone. Receive personalized advice for coping strategies
                         to help you through tough times. Trust MindMate as a

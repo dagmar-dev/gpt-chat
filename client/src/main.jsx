@@ -6,21 +6,18 @@ import './index.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { PostHogProvider } from 'posthog-js/react'
-
+import posthog from 'posthog-js'
 const queryClient = new QueryClient()
 
-const options = {
-    api_host:!import.meta.env.REACT_APP_PUBLIC_POSTHOG_HOST,
-}
+posthog.init(import.meta.env.VITE_REACT_APP_PUBLIC_POSTHOG_KEY, {
+    api_host: import.meta.env.VITE_REACT_APP_PUBLIC_POSTHOG_HOST,
+})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
-                <PostHogProvider
-                    apiKey={!import.meta.env.REACT_APP_PUBLIC_POSTHOG_KEY}
-                    options={options}
-                >
+                <PostHogProvider client={posthog}>
                     <App />
                 </PostHogProvider>
                 <ReactQueryDevtools initialIsOpen />
